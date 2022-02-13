@@ -6,11 +6,6 @@ use App\Models\Store;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 uses(RefreshDatabase::class);
 
-beforeEach(function () {
-    Store::factory()->create();
-    Item::factory()->create();
-});
-
 it('can add item to a store', function () {
     // arrange
     $store = Store::factory()->create();
