@@ -10,18 +10,10 @@ beforeEach(function () {
     Item::factory()->create();
 });
 
-it('has store')->assertDatabaseHas('stores', [
-    'id' => 1,
-]);
-
-it('has items')->assertDatabaseHas('items', [
-    'id' => 1,
-]);
-
 it('can add item to a store', function () {
     // arrange
-    $store = Store::find(1);
-    $item = Item::find(1);
+    $store = Store::first();
+    $item = Item::first();
 
     $quantity = 5;
 
@@ -39,8 +31,8 @@ it('can add item to a store', function () {
 
 it('can increase stock level of an item in a store', function () {
     // arrange
-    $store = Store::find(1);
-    $item = Item::find(1);
+    $store = Store::first();
+    $item = Item::first();
 
     $quantity = 5;
 
@@ -64,8 +56,8 @@ it('can increase stock level of an item in a store', function () {
 
 it('can decrease stock level of an item in a store', function () {
     // arrange
-    $store = Store::find(1);
-    $item = Item::find(1);
+    $store = Store::first();
+    $item = Item::first();
 
     $starting_quantity = 5;
 
@@ -88,8 +80,8 @@ it('can decrease stock level of an item in a store', function () {
 
 it('can\'t take stock for an item that doesn\'t exist', function () {
         // arrange
-        $store = Store::find(1);
-        $item = Item::find(1);
+        $store = Store::first();
+        $item = Item::first();
     
         $starting_quantity = 5;
     
