@@ -14,7 +14,6 @@ return new class extends Migration
     public function up()
     {
         Schema::create('stores_items', function (Blueprint $table) {
-            $table->id();
             $table->foreignId('store_id')->constrained();
             $table->foreignId('item_id')->constrainted();
             $table->integer('quantity')->default(0);
