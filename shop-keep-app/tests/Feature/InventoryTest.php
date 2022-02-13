@@ -1,19 +1,20 @@
 <?php
 
+use App\Exceptions\InventoryException;
 use App\Models\Item;
 use App\Models\Store;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 uses(RefreshDatabase::class);
 
-beforeEach(function () { 
+beforeEach(function () {
     Store::factory()->create();
     Item::factory()->create();
 });
 
 it('can add item to a store', function () {
     // arrange
-    $store = Store::first();
-    $item = Item::first();
+    $store = Store::factory()->create();
+    $item = Item::factory()->create();
 
     $quantity = 5;
 
@@ -31,8 +32,8 @@ it('can add item to a store', function () {
 
 it('can increase stock level of an item in a store', function () {
     // arrange
-    $store = Store::first();
-    $item = Item::first();
+    $store = Store::factory()->create();
+    $item = Item::factory()->create();
 
     $quantity = 5;
 
@@ -56,8 +57,8 @@ it('can increase stock level of an item in a store', function () {
 
 it('can decrease stock level of an item in a store', function () {
     // arrange
-    $store = Store::first();
-    $item = Item::first();
+    $store = Store::factory()->create();
+    $item = Item::factory()->create();
 
     $starting_quantity = 5;
 
@@ -67,9 +68,8 @@ it('can decrease stock level of an item in a store', function () {
         $starting_quantity
     );
 
-    $store->addInventory(
+    $store->takeInventory(
         $item,
-        -1
     );
 
     // assert
@@ -80,18 +80,14 @@ it('can decrease stock level of an item in a store', function () {
 
 it('can\'t take stock for an item that doesn\'t exist', function () {
         // arrange
-        $store = Store::first();
-        $item = Item::first();
+        $store = Store::factory()->create();
+        $item = Item::factory()->create();
     
         $starting_quantity = 5;
     
-        // act    
-        $store->addInventory(
+        // act   
+        $store->takeInventory(
             $item,
-            -1
+            1
         );
-    
-        // assert
-        expect($store->getInventory($item))
-            ->toThrow(InventoryException::class);
-});
+})->throws(InventoryException::class);;
