@@ -1,0 +1,25 @@
+<?php
+
+use App\Models\Currency;
+use Database\Seeders\CurrencySeeder;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+
+uses(RefreshDatabase::class)->group('currency', 'models');
+
+beforeEach(fn () => $this->seed(CurrencySeeder::class));
+
+it('can accurately convert between currencies', function (int $value, string $from, float $output, string $to) {
+    $from_currency = Currency::findBy('code', $from);
+    $to_currency = Currency::findBy('code', $to);
+    expect($from_currency->convert($value, $to_currency))->toEqual($output);
+})->with([
+    [ 5, 'gold', 500, 'copper'],
+    [ 5, 'gold', 50, 'silver'],
+    [ 5, 'gold', 10, 'electrum'],
+    [ 5, 'gold', 0.5, 'platinum'],
+    [ 5, 'silver', 50, 'copper'],
+    [ 5, 'silver', 0.05, 'platinum'],
+    [ 123, 'copper', 1.23, 'gold'],
+    [ 123, 'copper', 12.3, 'silver'],
+    [ 1, 'platinum', 1000, 'copper'],
+]);
