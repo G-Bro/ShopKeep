@@ -64,6 +64,19 @@ services:
             test: ["CMD", "mysqladmin", "ping", "-p${TEST_DB_PASSWORD}"]
             retries: 3
             timeout: 5s
+    phpmyadmin:
+        image: 'phpmyadmin/phpmyadmin'
+        ports:
+            - 8080:80
+        env_file: .env
+        environment:
+            PMA_HOST: mysql
+            PMA_USER: '${DB_USERNAME}'
+            PMA_PASSWORD: '${DB_PASSWORD}'
+            UPLOAD_LIMIT: '200M'
+            MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
+        networks:
+            - sail
     redis:
         image: 'redis:alpine'
         ports:
