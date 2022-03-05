@@ -22,7 +22,7 @@ class Store extends Model
     public function getInventory(Item $item)
     {
         if ($existing_record = $this->items()->where('id', $item->id)->first()) {
-            return $existing_record->pivot->quantity;
+            return (int) $existing_record->pivot->quantity;
         }
 
         return 0;
