@@ -4,7 +4,8 @@ use App\Exceptions\InventoryException;
 use App\Models\Item;
 use App\Models\Store;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-uses(RefreshDatabase::class);
+
+uses(RefreshDatabase::class)->group('store');
 
 it('can add item to a store', function () {
     // arrange
