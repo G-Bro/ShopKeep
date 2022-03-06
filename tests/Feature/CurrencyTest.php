@@ -23,3 +23,15 @@ it('can accurately convert between currencies', function (int $value, string $fr
     [ 123, 'copper', 12.3, 'silver'],
     [ 1, 'platinum', 1000, 'copper'],
 ]);
+
+it('can accurately output price as string', function (int $value, string $currency, string $output) {
+    $currency = Currency::findBy('code', $currency);
+
+    expect($currency->toString($value))->toEqual($output);
+})->with([
+    [5, 'copper', '5cp'],
+    [5, 'silver', '5sp'],
+    [5, 'electrum', '5ep'],
+    [5, 'gold', '5gp'],
+    [5, 'platinum', '5pp'],
+]);
