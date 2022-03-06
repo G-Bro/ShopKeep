@@ -8,4 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class Item extends Model
 {
     use HasFactory;
+
+    public function currency()
+    {
+        return $this->belongsTo(
+            Currency::class,
+        );
+    }
+
+    public function getPriceAttribute()
+    {
+        return $this->currency->toString($this->cost);
+    }
 }
