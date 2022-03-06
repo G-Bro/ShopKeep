@@ -17,4 +17,9 @@ class Currency extends Model
     {
         return $value / ($to->base_value / $this->base_value);
     }
+
+    public function toString(int $value): string
+    {
+        return "{$value}{$this->short_hand}";
+    }
 }
