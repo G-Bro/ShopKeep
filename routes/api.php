@@ -19,12 +19,17 @@ Route::middleware(['auth:sanctum'])->name('user.get')->get('/user', function (Re
     return $request->user();
 });
 
-Route::controller(ItemController::class)->group(function () {
-    Route::name('item.create')->post('/item', 'createItem');
+Route::middleware(['auth:sanctum'])->controller(ItemController::class)->group(function () {
+    Route::name('item.create')->post('/item', 'createItem')
+        ->middleware('can:create,item');
 
     Route::middleware('bindings')->group(function () {
-        Route::name('item.get')->get('/item/{item}', 'retrieveItem');
-        Route::name('item.update')->post('/item/{item}', 'updateItem');
-        Route::name('item.delete')->delete('/item/{item}', 'deleteItem');
+        Route::name('item.get')->get('/item/{item}', 'retrieveItem')
+            ->middleware('can:view,item');
+        Route::name('items.list')->get('/items/', 'listItems');
+        Route::name('item.update')->post('/item/{item}', 'updateItem')
+            ->middleware('can:update,item');
+        Route::name('item.delete')->delete('/item/{item}', 'deleteItem')
+            ->middleware('can:delete,item');
     });
 });

@@ -9,9 +9,16 @@ use Illuminate\Http\Request;
 
 class ItemController extends Controller
 {
-    public function retrieveItem(Item $item)
+    public function retrieveItem(Item $item, Request $request)
     {
         return new ItemResource($item);
+    }
+
+    public function listItems(Request $request)
+    {
+        $user = $request->user();
+
+        return ItemResource::collection($user->items);
     }
 
     public function createItem()

@@ -16,8 +16,15 @@ class Item extends Model
         );
     }
 
+    public function user()
+    {
+        return $this->belongsTo(
+            User::class,
+        );
+    }
+
     public function getPriceAttribute()
     {
-        return $this->currency->toString($this->cost);
+        return optional($this->currency)->toString($this->cost);
     }
 }
