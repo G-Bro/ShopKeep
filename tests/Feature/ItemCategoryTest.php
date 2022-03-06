@@ -1,6 +1,6 @@
 <?php
 
-uses()->group('item-categories');
+uses()->group('item-categories', 'models');
 
 it('can list items by type');
 

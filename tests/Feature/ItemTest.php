@@ -1,6 +1,6 @@
 <?php
 
-uses()->group('items');
+uses()->group('items', 'models');
 
 it('can\'t delete a global item');
 

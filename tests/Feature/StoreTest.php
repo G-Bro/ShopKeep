@@ -5,7 +5,7 @@ use App\Models\Item;
 use App\Models\Store;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-uses(RefreshDatabase::class)->group('store');
+uses(RefreshDatabase::class)->group('store', 'models');
 
 it('can add item to a store', function () {
     // arrange
