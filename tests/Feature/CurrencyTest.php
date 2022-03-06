@@ -3,10 +3,14 @@
 use App\Models\Currency;
 use Database\Seeders\CurrencySeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Artisan;
 
-uses(RefreshDatabase::class)->group('currency', 'models');
+uses()->group('currency', 'models');
 
-beforeEach(fn () => $this->seed(CurrencySeeder::class));
+it('has the correct starting data', function () {
+    Artisan::call('db:seed', ['--class' => CurrencySeeder::class]);
+    expect(Currency::get()->count())->toEqual(5);
+});
 
 it('can accurately convert between currencies', function (int $value, string $from, float $output, string $to) {
     $from_currency = Currency::findBy('code', $from);
