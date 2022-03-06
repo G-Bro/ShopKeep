@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('items', function (Blueprint $table) {
-            $table->foreignId('currency_id')->constrained();
+            $table->foreignId('currency_id')->nullable()->constrained();
             $table->unsignedInteger('cost')->default(0);
         });
     }
