@@ -20,26 +20,31 @@ class CurrencySeeder extends Seeder
                 'code' => 'copper',
                 'name' => 'Copper',
                 'base_value' => 1,
+                'short_hand' => 'cp',
             ],
             [
                 'code' => 'silver',
                 'name' => 'Silver',
                 'base_value' => 10,
+                'short_hand' => 'sp',
             ],
             [
                 'code' => 'electrum',
                 'name' => 'Electrum',
                 'base_value' => 50,
+                'short_hand' => 'ep',
             ],
             [
                 'code' => 'gold',
                 'name' => 'Gold',
                 'base_value' => 100,
+                'short_hand' => 'gp',
             ],
             [
                 'code' => 'platinum',
                 'name' => 'Platinum',
                 'base_value' => 1000,
+                'short_hand' => 'pp',
             ],
         ]);
     }
