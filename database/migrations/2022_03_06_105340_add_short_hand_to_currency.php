@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('currencies', function (Blueprint $table) {
-            $table->string('short_hand', 2);
+            $table->string('short_hand', 2)->default('');
         });
     }
 
